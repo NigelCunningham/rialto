@@ -53,7 +53,7 @@ class ProcessSupervisor
      * @var string[]
      */
     protected const USELESS_OPTIONS_FOR_PROCESS = [
-        'executable_path', 'read_timeout', 'stop_timeout', 'logger', 'debug',
+        'executable_path', 'read_timeout', 'stop_timeout', 'logger', 'debug', 'leave_running',
     ];
 
     /**
@@ -84,6 +84,9 @@ class ProcessSupervisor
         //   - adds the --inspect flag to Node's command
         //   - appends stack traces to Node exception messages
         'debug' => false,
+
+        // Leave puppeteer running when destructed.
+        'leave_running' => false,
     ];
 
     /**
@@ -159,6 +162,10 @@ class ProcessSupervisor
      */
     public function __destruct()
     {
+        if ($this->options['leave_running']) {
+            return;
+        }
+
         $logContext = ['pid' => $this->processPid];
 
         $this->waitForProcessTermination();
