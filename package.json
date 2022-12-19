@@ -1,5 +1,5 @@
 {
-  "name": "@nesk/rialto",
+  "name": "@nigelcunningham/rialto",
   "version": "1.4.0",
   "description": "Manage Node resources from PHP",
   "keywords": [
@@ -11,12 +11,12 @@
     "socket"
   ],
   "author": {
-    "name": "Johann Pardanaud",
-    "email": "pardanaud.j@gmail.com",
-    "url": "https://johann.pardanaud.com/"
+    "name": "Nigel Cunningham",
+    "email": "nigel@nigelcunningham.com.au",
+    "url": "https://nigelcunningham.com.au"
   },
   "license": "MIT",
-  "repository": "github:nesk/rialto",
+  "repository": "github:nigelcunningham/rialto",
   "main": "src/node-process",
   "engines": {
     "node": ">=8.0.0"

@@ -1,5 +1,5 @@
 {
-    "name": "nesk/rialto",
+    "name": "nigelcunningham/rialto",
     "description": "Manage Node resources from PHP",
     "keywords": [
         "php",
@@ -15,6 +15,10 @@
         {
             "name": "Johann Pardanaud",
             "email": "pardanaud.j@gmail.com"
+        },
+        {
+            "name": "Nigel Cunningham",
+            "email": "nigel@nigelcunningham.com.au"
         }
     ],
     "require": {
@@ -32,12 +36,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Nesk\\Rialto\\": "src/"
+            "NigelCunningham\\Rialto\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Nesk\\Rialto\\Tests\\": "tests/"
+            "NigelCunningham\\Rialto\\Tests\\": "tests/"
         }
     },
     "scripts": {
