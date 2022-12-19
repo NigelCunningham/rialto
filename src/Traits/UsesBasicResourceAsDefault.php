@@ -1,6 +1,6 @@
 <?php
 
-namespace Nesk\Rialto\Traits;
+namespace NigelCunningham\Rialto\Traits;
 
 trait UsesBasicResourceAsDefault
 {
@@ -9,6 +9,6 @@ trait UsesBasicResourceAsDefault
      */
     public function defaultResource(): string
     {
-        return \Nesk\Rialto\Data\BasicResource::class;
+        return \NigelCunningham\Rialto\Data\BasicResource::class;
     }
 }

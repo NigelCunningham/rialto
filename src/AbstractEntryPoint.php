@@ -1,8 +1,8 @@
 <?php
 
-namespace Nesk\Rialto;
+namespace NigelCunningham\Rialto;
 
-use Nesk\Rialto\Interfaces\ShouldHandleProcessDelegation;
+use NigelCunningham\Rialto\Interfaces\ShouldHandleProcessDelegation;
 
 abstract class AbstractEntryPoint
 {

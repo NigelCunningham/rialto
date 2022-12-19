@@ -1,6 +1,6 @@
 <?php
 
-namespace Nesk\Rialto\Data;
+namespace NigelCunningham\Rialto\Data;
 
 class JsFunction implements \JsonSerializable
 {

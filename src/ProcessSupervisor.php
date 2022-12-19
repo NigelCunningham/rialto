@@ -1,18 +1,18 @@
 <?php
 
-namespace Nesk\Rialto;
+namespace NigelCunningham\Rialto;
 
 use Psr\Log\LogLevel;
 use RuntimeException;
 use Socket\Raw\Socket;
 use Socket\Raw\Factory as SocketFactory;
 use Socket\Raw\Exception as SocketException;
-use Nesk\Rialto\Exceptions\IdleTimeoutException;
+use NigelCunningham\Rialto\Exceptions\IdleTimeoutException;
 use Symfony\Component\Process\Process as SymfonyProcess;
 use Symfony\Component\Process\Exception\ProcessFailedException;
-use Nesk\Rialto\Interfaces\ShouldHandleProcessDelegation;
-use Nesk\Rialto\Exceptions\Node\Exception as NodeException;
-use Nesk\Rialto\Exceptions\Node\FatalException as NodeFatalException;
+use NigelCunningham\Rialto\Interfaces\ShouldHandleProcessDelegation;
+use NigelCunningham\Rialto\Exceptions\Node\Exception as NodeException;
+use NigelCunningham\Rialto\Exceptions\Node\FatalException as NodeFatalException;
 
 class ProcessSupervisor
 {
@@ -103,7 +103,7 @@ class ProcessSupervisor
     /**
      * The process delegate.
      *
-     * @var \Nesk\Rialto\ShouldHandleProcessDelegation;
+     * @var \NigelCunningham\Rialto\ShouldHandleProcessDelegation;
      */
     protected $delegate;
 
@@ -230,7 +230,7 @@ class ProcessSupervisor
         $process = new SymfonyProcess([
             $this->options['executable_path'],
             '-e',
-            "process.stdout.write(require.resolve('@nesk/rialto/src/node-process/serve.js'))",
+            "process.stdout.write(require.resolve('@nigelcunningham/rialto/src/node-process/serve.js'))",
         ]);
 
         $exitCode = $process->run();
@@ -393,8 +393,8 @@ class ProcessSupervisor
     /**
      * Read the next value written by the process.
      *
-     * @throws \Nesk\Rialto\Exceptions\ReadSocketTimeoutException if reading the socket exceeded the timeout.
-     * @throws \Nesk\Rialto\Exceptions\Node\Exception if the process returned an error.
+     * @throws \NigelCunningham\Rialto\Exceptions\ReadSocketTimeoutException if reading the socket exceeded the timeout.
+     * @throws \NigelCunningham\Rialto\Exceptions\Node\Exception if the process returned an error.
      */
     protected function readNextProcessValue(bool $valueShouldBeLogged = true)
     {

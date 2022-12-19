@@ -1,10 +1,10 @@
 <?php
 
-namespace Nesk\Rialto\Data;
+namespace NigelCunningham\Rialto\Data;
 
-use Nesk\Rialto\Exceptions\Node\Exception;
-use Nesk\Rialto\Interfaces\ShouldHandleProcessDelegation;
-use Nesk\Rialto\Interfaces\{ShouldIdentifyResource, ShouldCommunicateWithProcessSupervisor};
+use NigelCunningham\Rialto\Exceptions\Node\Exception;
+use NigelCunningham\Rialto\Interfaces\ShouldHandleProcessDelegation;
+use NigelCunningham\Rialto\Interfaces\{ShouldIdentifyResource, ShouldCommunicateWithProcessSupervisor};
 
 trait UnserializesData
 {

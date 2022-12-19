@@ -1,11 +1,11 @@
 <?php
 
-namespace Nesk\Rialto;
+namespace NigelCunningham\Rialto;
 
 use BadMethodCallException;
 use InvalidArgumentException;
-use Nesk\Rialto\Interfaces\ShouldIdentifyResource;
-use Nesk\Rialto\Exceptions\Node\Exception as NodeException;
+use NigelCunningham\Rialto\Interfaces\ShouldIdentifyResource;
+use NigelCunningham\Rialto\Exceptions\Node\Exception as NodeException;
 
 class Instruction implements \JsonSerializable
 {
@@ -38,7 +38,7 @@ class Instruction implements \JsonSerializable
     /**
      * The resource associated to the instruction.
      *
-     * @var \Nesk\Rialto\Traits\IdentifiesResource|null
+     * @var \NigelCunningham\Rialto\Traits\IdentifiesResource|null
      */
     protected $resource;
 

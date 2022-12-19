@@ -1,8 +1,8 @@
 <?php
 
-namespace Nesk\Rialto\Interfaces;
+namespace NigelCunningham\Rialto\Interfaces;
 
-use Nesk\Rialto\ProcessSupervisor;
+use NigelCunningham\Rialto\ProcessSupervisor;
 
 interface ShouldCommunicateWithProcessSupervisor
 {

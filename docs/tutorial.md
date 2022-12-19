@@ -7,8 +7,8 @@ We will create a bridge to use [Node's File System module](https://nodejs.org/ap
 Import Rialto in your project:
 
 ```
-composer require nesk/rialto
-npm install @nesk/rialto
+composer require nigelcunningham/rialto
+npm install @nigelcunningham/rialto
 ```
 
 ## The essential files
@@ -33,7 +33,7 @@ class FileSystem extends AbstractEntryPoint
 
 ```js
 const fs = require('fs'),
-    {ConnectionDelegate} = require('@nesk/rialto');
+    {ConnectionDelegate} = require('@nigelcunningham/rialto');
 
 module.exports = class FileSystemConnectionDelegate extends ConnectionDelegate
 {

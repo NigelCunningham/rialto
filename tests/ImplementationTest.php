@@ -1,18 +1,18 @@
 <?php
 
-namespace Nesk\Rialto\Tests;
+namespace NigelCunningham\Rialto\Tests;
 
 use Monolog\Logger;
-use Nesk\Rialto\Data\JsFunction;
-use Nesk\Rialto\Exceptions\Node;
-use Nesk\Rialto\Data\BasicResource;
+use NigelCunningham\Rialto\Data\JsFunction;
+use NigelCunningham\Rialto\Exceptions\Node;
+use NigelCunningham\Rialto\Data\BasicResource;
 use Symfony\Component\Process\Process;
-use Nesk\Rialto\Tests\Implementation\Resources\Stats;
-use Nesk\Rialto\Tests\Implementation\{FsWithProcessDelegation, FsWithoutProcessDelegation};
+use NigelCunningham\Rialto\Tests\Implementation\Resources\Stats;
+use NigelCunningham\Rialto\Tests\Implementation\{FsWithProcessDelegation, FsWithoutProcessDelegation};
 
 class ImplementationTest extends TestCase
 {
-    const JS_FUNCTION_CREATE_DEPRECATION_PATTERN = '/^Nesk\\\\Rialto\\\\Data\\\\JsFunction::create\(\)/';
+    const JS_FUNCTION_CREATE_DEPRECATION_PATTERN = '/^NigelCunningham\\\\Rialto\\\\Data\\\\JsFunction::create\(\)/';
 
     protected function setUp(): void
     {
@@ -260,7 +260,7 @@ class ImplementationTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Nesk\Rialto\Exceptions\Node\FatalException
+     * @expectedException \NigelCunningham\Rialto\Exceptions\Node\FatalException
      * @expectedExceptionMessage Object.__inexistantMethod__ is not a function
      */
     public function node_crash_throws_a_fatal_exception()
@@ -270,7 +270,7 @@ class ImplementationTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Nesk\Rialto\Exceptions\Node\Exception
+     * @expectedException \NigelCunningham\Rialto\Exceptions\Node\Exception
      * @expectedExceptionMessage Object.__inexistantMethod__ is not a function
      */
     public function can_catch_errors()
@@ -280,7 +280,7 @@ class ImplementationTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Nesk\Rialto\Exceptions\Node\FatalException
+     * @expectedException \NigelCunningham\Rialto\Exceptions\Node\FatalException
      * @expectedExceptionMessage Object.__inexistantMethod__ is not a function
      */
     public function catching_a_node_exception_doesnt_catch_fatal_exceptions()
@@ -345,7 +345,7 @@ class ImplementationTest extends TestCase
 
         sleep(1);
 
-        $this->expectException(\Nesk\Rialto\Exceptions\IdleTimeoutException::class);
+        $this->expectException(\NigelCunningham\Rialto\Exceptions\IdleTimeoutException::class);
         $this->expectExceptionMessageRegExp('/^The idle timeout \(0\.500 seconds\) has been exceeded/');
 
         $this->fs->constants;
@@ -354,7 +354,7 @@ class ImplementationTest extends TestCase
     /**
      * @test
      * @dontPopulateProperties fs
-     * @expectedException \Nesk\Rialto\Exceptions\ReadSocketTimeoutException
+     * @expectedException \NigelCunningham\Rialto\Exceptions\ReadSocketTimeoutException
      * @expectedExceptionMessageRegExp /^The timeout \(0\.010 seconds\) has been exceeded/
      */
     public function read_timeout_option_throws_an_exception_on_long_actions()
@@ -438,7 +438,7 @@ class ImplementationTest extends TestCase
 
         \usleep(10000); # To make sure the process had enough time to be killed.
 
-        $this->expectException(\Nesk\Rialto\Exceptions\ProcessUnexpectedlyTerminatedException::class);
+        $this->expectException(\NigelCunningham\Rialto\Exceptions\ProcessUnexpectedlyTerminatedException::class);
         $this->expectExceptionMessage('The process has been unexpectedly terminated.');
 
         $this->fs->foo;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nesk\Rialto\Exceptions\Node;
+namespace NigelCunningham\Rialto\Exceptions\Node;
 
 trait HandlesNodeErrors
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Nesk\Rialto\Tests;
+namespace NigelCunningham\Rialto\Tests;
 
 use Monolog\Logger;
 use ReflectionClass;

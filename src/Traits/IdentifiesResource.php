@@ -1,16 +1,16 @@
 <?php
 
-namespace Nesk\Rialto\Traits;
+namespace NigelCunningham\Rialto\Traits;
 
 use RuntimeException;
-use Nesk\Rialto\Data\ResourceIdentity;
+use NigelCunningham\Rialto\Data\ResourceIdentity;
 
 trait IdentifiesResource
 {
     /**
      * The identity of the resource.
      *
-     * @var \Nesk\Rialto\ResourceIdentity
+     * @var \NigelCunningham\Rialto\ResourceIdentity
      */
     protected $resourceIdentity;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Nesk\Rialto\Exceptions\Node;
+namespace NigelCunningham\Rialto\Exceptions\Node;
 
 use Symfony\Component\Process\Process;
-use Nesk\Rialto\Exceptions\IdentifiesProcess;
+use NigelCunningham\Rialto\Exceptions\IdentifiesProcess;
 
 class FatalException extends \RuntimeException
 {

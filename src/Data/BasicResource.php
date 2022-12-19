@@ -1,9 +1,9 @@
 <?php
 
-namespace Nesk\Rialto\Data;
+namespace NigelCunningham\Rialto\Data;
 
-use Nesk\Rialto\Traits\{IdentifiesResource, CommunicatesWithProcessSupervisor};
-use Nesk\Rialto\Interfaces\{ShouldIdentifyResource, ShouldCommunicateWithProcessSupervisor};
+use NigelCunningham\Rialto\Traits\{IdentifiesResource, CommunicatesWithProcessSupervisor};
+use NigelCunningham\Rialto\Interfaces\{ShouldIdentifyResource, ShouldCommunicateWithProcessSupervisor};
 
 class BasicResource implements ShouldIdentifyResource, ShouldCommunicateWithProcessSupervisor, \JsonSerializable
 {

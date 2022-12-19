@@ -1,6 +1,6 @@
 <?php
 
-namespace Nesk\Rialto\Exceptions;
+namespace NigelCunningham\Rialto\Exceptions;
 
 class ReadSocketTimeoutException extends \RuntimeException
 {

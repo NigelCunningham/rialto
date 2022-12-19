@@ -1,6 +1,6 @@
 <?php
 
-namespace Nesk\Rialto;
+namespace NigelCunningham\Rialto;
 
 use Symfony\Component\Process\Process;
 use Psr\Log\{LoggerInterface, LogLevel};
