@@ -170,7 +170,7 @@ class ProcessSupervisor
 
         $this->waitForProcessTermination();
 
-        if ($this->process->isRunning()) {
+        if ($this->process && $this->process->isRunning()) {
             $this->executeInstruction(Instruction::noop(), false); // Fetch the missing remote logs
 
             $this->logger->info('Stopping process with PID {pid}...', $logContext);
