@@ -53,7 +53,7 @@ class ProcessSupervisor
      * @var string[]
      */
     protected const USELESS_OPTIONS_FOR_PROCESS = [
-        'executable_path', 'read_timeout', 'stop_timeout', 'logger', 'debug', 'leave_running',
+        'executable_path', 'read_timeout', 'stop_timeout', 'logger', 'debug', 'leave_running', 'env'
     ];
 
     /**
@@ -87,6 +87,9 @@ class ProcessSupervisor
 
         // Leave puppeteer running when destructed.
         'leave_running' => false,
+
+        // Environmental variables to be set.
+        'env' => [],
     ];
 
     /**
@@ -238,7 +241,7 @@ class ProcessSupervisor
             $this->options['executable_path'],
             '-e',
             "process.stdout.write(require.resolve('@nigelcunningham/rialto/src/node-process/serve.js'))",
-        ]);
+        ], null, $this->options['env'] ?? null);
 
         $exitCode = $process->run();
 
@@ -272,7 +275,7 @@ class ProcessSupervisor
             [$this->getProcessScriptPath()],
             [$realConnectionDelegatePath],
             [json_encode((object) $processOptions)]
-        ));
+        ), null, $this->options['env']);
     }
 
     /**
