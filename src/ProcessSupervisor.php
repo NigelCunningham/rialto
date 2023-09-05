@@ -410,24 +410,29 @@ class ProcessSupervisor
     {
         $readTimeout = $this->options['read_timeout'];
         $payload = '';
+        $chunksLeft = 0;
+        $misalignment = 0;
+        $currentChunk = '';
+        $nextChunk = '';
 
         try {
             $startTimestamp = microtime(true);
 
             do {
-                $this->client->selectRead($readTimeout);
-                $packet = $this->client->read(static::SOCKET_PACKET_SIZE);
+                $currentChunk = $nextChunk;
+                do {
+                  $this->client->selectRead($readTimeout);
+                  $packet = $this->client->read(static::SOCKET_PACKET_SIZE);
+                  $missing = static::SOCKET_PACKET_SIZE - strlen($currentChunk);
+                  $currentChunk .= substr($packet, 0, $missing);
+                  $nextChunk = substr($packet, $missing);
+                } while ($chunksLeft > 1 && strlen($currentChunk) < static::SOCKET_PACKET_SIZE);
 
-                $chunksLeft = (int) substr($packet, 0, static::SOCKET_HEADER_SIZE);
-                $chunk = substr($packet, static::SOCKET_HEADER_SIZE);
+                $chunksLeft = (int) substr($currentChunk, 0, static::SOCKET_HEADER_SIZE);
+                $currentChunk = substr($currentChunk, static::SOCKET_HEADER_SIZE);
 
-                $payload .= $chunk;
-
-                if ($chunksLeft > 0) {
-                    // The next chunk might be an empty string if don't wait a short period on slow environments.
-                    usleep(self::SOCKET_NEXT_CHUNK_DELAY * 1000);
-                }
-            } while ($chunksLeft > 0);
+                $payload .= $currentChunk;
+            } while ($chunksLeft);
         } catch (SocketException $exception) {
             $this->waitForProcessTermination();
             $this->checkProcessStatus();
