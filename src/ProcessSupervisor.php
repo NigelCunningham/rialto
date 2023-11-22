@@ -411,9 +411,8 @@ class ProcessSupervisor
         $readTimeout = $this->options['read_timeout'];
         $payload = '';
         $chunksLeft = 0;
-        $misalignment = 0;
-        $currentChunk = '';
         $nextChunk = '';
+        $origNumChunks = -1;
 
         try {
             $startTimestamp = microtime(true);
@@ -421,17 +420,32 @@ class ProcessSupervisor
             do {
                 $currentChunk = $nextChunk;
                 do {
-                  $this->client->selectRead($readTimeout);
-                  $packet = $this->client->read(static::SOCKET_PACKET_SIZE);
-                  $missing = static::SOCKET_PACKET_SIZE - strlen($currentChunk);
-                  $currentChunk .= substr($packet, 0, $missing);
-                  $nextChunk = substr($packet, $missing);
+                  if ($origNumChunks == -1 || ($chunksLeft > 0 && !strlen($currentChunk))) {
+                    if (!$this->client->selectRead($readTimeout)) {
+                      throw SocketException::createFromCode(SOCKET_EAGAIN, 'Socket read timedout');
+                    }
+                  }
+                  try {
+                    $packet = $this->client->read(static::SOCKET_PACKET_SIZE);
+                  }
+                  catch (SocketException $exception) {
+                    // No data to get? Can happen on the last packet of multiple chunks.
+                    // E_AGAIN is ok. Nothing else is.
+                    if ($exception->getCode() !== 11) {
+                      throw $exception;
+                    }
+                    $packet = '';
+                  }
+                  $nextChunkStart = static::SOCKET_PACKET_SIZE - strlen($currentChunk);
+                  $currentChunk .= substr($packet, 0, $nextChunkStart);
+                  $nextChunk = substr($packet, $nextChunkStart);
                 } while ($chunksLeft > 1 && strlen($currentChunk) < static::SOCKET_PACKET_SIZE);
 
                 $chunksLeft = (int) substr($currentChunk, 0, static::SOCKET_HEADER_SIZE);
-                $currentChunk = substr($currentChunk, static::SOCKET_HEADER_SIZE);
-
-                $payload .= $currentChunk;
+                if ($origNumChunks == -1) {
+                  $origNumChunks = $chunksLeft + 1;
+                }
+                $payload .= substr($currentChunk, static::SOCKET_HEADER_SIZE);
             } while ($chunksLeft);
         } catch (SocketException $exception) {
             $this->waitForProcessTermination();
